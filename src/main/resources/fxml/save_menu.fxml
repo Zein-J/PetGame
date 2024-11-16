@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml" 
+      fx:controller="com.example.controller.SaveMenuController"
+      spacing="20" alignment="CENTER" styleClass="save-menu">
+    
+    <Label text="Create Or Load Save Files" styleClass="title-label"/>
+    
+    <VBox spacing="15" alignment="CENTER" VBox.vgrow="ALWAYS">
+        <ListView fx:id="saveSlotList" 
+                  VBox.vgrow="ALWAYS" 
+                  styleClass="save-slot-list"
+                  fixedCellSize="80"
+                  maxHeight="320"/>
+    </VBox>
+    
+    <Button text="BACK TO MAIN MENU" styleClass="back-button" onAction="#goBack"/>
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+</VBox>

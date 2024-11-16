@@ -31,7 +31,17 @@ target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 
 # Logs
 *.log
+pnpm-debug.log*
 
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Node
+node_modules/
+pnpm-lock.yaml
+
+# Save files
+saves/
+*.json
+!package.json

@@ -1,0 +1,10 @@
+{
+    "name": "javafx-hot-reload",
+    "version": "1.0.0",
+    "scripts": {
+      "watch": "node watch.js"
+    },
+    "devDependencies": {
+      "chokidar": "^3.5.3"
+    }
+  }

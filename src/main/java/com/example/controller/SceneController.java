@@ -10,6 +10,7 @@ import javafx.stage.Window;
 
 public class SceneController {
     private static SceneController instance;
+    private Scene currentScene;
     
     private SceneController() {}
     
@@ -24,23 +25,42 @@ public class SceneController {
         loadFXML("game.fxml");
     }
 
+    public void switchToSaveMenu() {
+        loadFXML("save_menu.fxml");
+    }
+
+    public void switchToMainMenu() {
+        loadFXML("main_menu.fxml");
+    }
+
+    private Scene getCurrentScene() {
+        if (currentScene == null) {
+            Window window = Stage.getWindows().stream()
+                .filter(Window::isShowing)
+                .findFirst()
+                .orElse(null);
+            
+            if (window != null) {
+                currentScene = ((Stage) window).getScene();
+            }
+        }
+        return currentScene;
+    }
+
     private void loadFXML(String fxml) {
         try {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/" + fxml));
-            Stage stage = (Stage) getCurrentScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = getCurrentScene();
+            if (scene != null) {
+                scene.setRoot(root);
+                currentScene = scene;
+            } else {
+                System.err.println("No active scene found");
+            }
         } catch (IOException e) {
             System.err.println("Failed to load FXML: " + fxml);
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    private Scene getCurrentScene() {
-        return Stage.getWindows().stream()
-                .filter(Window::isShowing)
-                .map(window -> ((Stage) window).getScene())
-                .findFirst()
-                .orElse(null);
     }
 }

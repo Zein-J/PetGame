@@ -1,13 +1,21 @@
-<h3>IMPORTANT</h3>
-The program can only be run using the terminal command:
+## IMPORTANT INSTRUCTIONS
+The program can only be run using terminal commands.
 
-`mvn clean javafx:run`
+For regular use: `mvn clean javafx:run`
 
-<h2>Setup Instructions</h2>
-<h3>Windows</h3>
+For development mode (hot reloading): 
+- Windows: `dev.bat`
+- macOS: `./dev.sh`
 
-Installing JavaFX
-https://www.tutorialspoint.com/javafx/javafx_environment.htm
+**Note:** You must set up the development environment before using development mode. Instructions below.
+
+## Setup Instructions for Maven and JavaFX
+
+**You must complete this setup regardless of whether you want to use development mode or not.**
+
+### Windows
+
+Install JavaFX: https://www.tutorialspoint.com/javafx/javafx_environment.htm
 
 Download:
 https://gluonhq.com/products/javafx/
@@ -25,12 +33,11 @@ https://gluonhq.com/products/javafx/
    - Variable value: C:\Program Files\JavaFX\javafx-sdk-23.0.1\lib
 7. Click "OK" on every window to exit
 
-Installing Apache Maven
-https://phoenixnap.com/kb/install-maven-windows#step-4-verify-maven-installation
+Install Maven by following this guide: https://phoenixnap.com/kb/install-maven-windows#step-4-verify-maven-installation
 
 Download:
 https://maven.apache.org/download.cgi
-Binary zip archive apache-maven-3.9.9-bin.zip
+(Binary zip archive apache-maven-3.9.9-bin.zip)
 
 1. Create a folder in your C drive and name it "Maven"
    - C:\Program Files\Maven
@@ -45,9 +52,48 @@ Binary zip archive apache-maven-3.9.9-bin.zip
    - C:\Program Files\Maven\apache-maven-3.9.9\bin
 9. Click "OK" on every window to exit
 
-<h3>macOS (in terminal)</h3>
+### macOS (in terminal)
 
-1. Install Homebrew: `sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-2. Install Java 23: `brew install openjdk@23`
-3. Add Java to PATH: `export PATH="/opt/homebrew/opt/openjdk@23/bin:$PATH"`
-4. Install Maven: `brew install maven`
+1. Install Homebrew: 
+   ```bash
+   sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+2. Install Java 23: 
+   ```bash
+   brew install openjdk@23
+   ```
+3. Add Java to PATH: 
+   ```bash
+   export PATH="/opt/homebrew/opt/openjdk@23/bin:$PATH"
+   ```
+4. Install Maven: 
+   ```bash
+   brew install maven
+   ```
+And that's it! You can now run the program using `mvn clean javafx:run`
+
+## Development Mode (Hot Reloading)
+1. Install Node and pnpm:
+   ```bash
+   # macOS
+   brew install node
+   brew install pnpm
+   
+   # Windows
+   Download Node.js from https://nodejs.org/
+   npm install -g pnpm
+   ```
+
+2. Install development dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Start development mode:
+   ```bash
+   # macOS
+   ./dev.sh
+   
+   # Windows
+   dev.bat
+   ```

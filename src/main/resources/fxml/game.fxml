@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.controller.GameController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" 
+      fx:controller="com.example.controller.SaveMenuController"
+      spacing="10" alignment="CENTER" styleClass="save-menu">
+    
+    <ListView fx:id="saveFileList" VBox.vgrow="ALWAYS"/>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="saveNameField" promptText="Enter save name..." HBox.hgrow="ALWAYS"/>
+        <Button text="Save" onAction="#saveGame" styleClass="menu-button"/>
+    </HBox>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Load" onAction="#loadSelectedSave" styleClass="menu-button"/>
+        <Button text="Delete" onAction="#deleteSelectedSave" styleClass="menu-button"/>
+        <Button text="Back" onAction="#goBack" styleClass="menu-button"/>
+    </HBox>
 </VBox>

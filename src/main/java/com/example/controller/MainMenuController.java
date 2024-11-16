@@ -11,7 +11,7 @@ public class MainMenuController {
 
     @FXML
     private void loadGame() {
-
+        SceneController.getInstance().switchToSaveMenu();
     }
 
     @FXML
