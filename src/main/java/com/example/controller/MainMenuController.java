@@ -127,6 +127,7 @@ public class MainMenuController {
 
     @FXML
     private void openSettings() {
+        SceneController.getInstance().switchToSettings();
     }
 
     @FXML

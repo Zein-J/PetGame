@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
 import java.io.IOException;
 
 public class SceneController {
@@ -32,6 +31,10 @@ public class SceneController {
 
     public void switchToMainMenu() {
         loadFXML("main_menu.fxml");
+    }
+
+    public void switchToSettings() {
+        loadFXML("settings.fxml");
     }
 
     private Scene getCurrentScene() {

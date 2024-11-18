@@ -3,7 +3,8 @@
 }
 
 .menu-button {
-    -fx-background-color: #6495ED;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
     -fx-text-fill: #000000;
     -fx-font-size: 18px;
     -fx-min-width: 200px;
@@ -135,4 +136,31 @@
 .save-slot-button:hover {
     -fx-background-color: #F0F0F0;
     -fx-cursor: hand;
+}
+
+.toggle {
+    -fx-background-color: #e9e9eb;
+    -fx-background-radius: 16;
+    -fx-min-width: 52;
+    -fx-min-height: 32;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.toggle:selected {
+    -fx-background-color: #34c759;
+}
+
+.toggle > .thumb-area {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-pref-width: 28;
+    -fx-pref-height: 28;
+    -fx-translate-x: 2;
+    -fx-translate-y: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0, 0, 2);
+}
+
+.toggle:selected > .thumb-area {
+    -fx-translate-x: 22;
 }
