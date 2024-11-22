@@ -15,6 +15,16 @@
         <ToggleButton fx:id="parentalControlsToggle" styleClass="toggle"/>
     </HBox>
 
+    <HBox spacing="15" alignment="CENTER">
+        <Label text="Sound Volume" styleClass="subtitle-label"/>
+        <Slider fx:id="volumeSlider" 
+                min="0" max="100" value="50"
+                styleClass="volume-slider"
+                prefWidth="150"
+                showTickLabels="false"
+                showTickMarks="false"/>
+    </HBox>
+
     <Button text="Back to Main Menu" 
             onAction="#goBack" 
             styleClass="back-button"/>

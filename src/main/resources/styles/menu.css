@@ -164,3 +164,35 @@
 .toggle:selected > .thumb-area {
     -fx-translate-x: 22;
 }
+
+.mole-sprite {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);
+}
+
+.game {
+    -fx-background-color: #90EE90;
+    -fx-padding: 20;
+}
+
+.volume-slider {
+    -fx-background-color: transparent;
+}
+
+.volume-slider .track {
+    -fx-background-color: #e9e9eb;
+    -fx-background-radius: 4;
+    -fx-pref-height: 8;
+}
+
+.volume-slider .thumb {
+    -fx-background-color: #34c759;
+    -fx-background-radius: 8;
+    -fx-pref-height: 16;
+    -fx-pref-width: 16;
+}
+
+.volume-slider .colored-track {
+    -fx-fill: #34c759;
+    -fx-stroke-width: 0;
+    -fx-background-radius: 4;
+}
