@@ -1,4 +1,5 @@
 package com.example.model;
 
-public class PetAction {
+public interface PetAction {
+    void execute(VitalStats stats);
 }

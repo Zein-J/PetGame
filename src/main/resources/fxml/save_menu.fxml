@@ -4,11 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.controller.SaveMenuController"
       spacing="20" alignment="CENTER" styleClass="save-menu">
 
-    <Label text="Create Or Load Save Files" styleClass="title-label"/>
+    <Label text="Start New Game or Load Save Files" styleClass="title-label"/>
 
     <StackPane VBox.vgrow="ALWAYS">
         <VBox spacing="15" alignment="CENTER">
@@ -23,6 +25,15 @@
             <Label text="CREATING NEW SAVE" styleClass="dialogue-title"/>
             <Label text="NAME YOUR PET:" styleClass="dialogue-subtitle"/>
             <TextField fx:id="petNameField" maxWidth="300"/>
+            <ComboBox fx:id="petTypeComboBox" maxWidth="300">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Mole"/>
+                        <String fx:value="Cat"/>
+                        <String fx:value="Bear"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
             <HBox spacing="20" alignment="CENTER">
                 <Button text="CONFIRM" onAction="#confirmNewSave" styleClass="dialogue-button"/>
                 <Button text="CANCEL" onAction="#cancelNewSave" styleClass="dialogue-button"/>
