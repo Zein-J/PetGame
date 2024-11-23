@@ -207,7 +207,6 @@ public class GameController {
     @FXML
     private void openInventory(){
         System.out.println("Inventory has not been made yet");
-        stopStatsDecay();
         if (animation != null) {
             animation.stop();
         }
