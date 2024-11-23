@@ -108,4 +108,7 @@ public class SettingsController {
     private void goBack() {
         SceneController.getInstance().switchToMainMenu();
     }
+
+    @FXML
+    private void goParent(){SceneController.getInstance().switchToLoginParent();}
 }

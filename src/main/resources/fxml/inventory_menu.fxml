@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      alignment="TOP_CENTER"
+      spacing="20"
+      style="-fx-padding: 20;"
+      fx:controller="com.example.controller.InventoryController">
+
+    <!-- Title -->
+    <Label text="Inventory" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+    <!-- Inventory Grid -->
+    <GridPane hgap="50" vgap="20" alignment="CENTER" style="-fx-padding: 20;">
+        <!-- Define column constraints for even spacing -->
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+        </columnConstraints>
+
+        <!-- Item 1 -->
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0">
+            <ImageView fx:id="item1Image" fitWidth="100" fitHeight="100" preserveRatio="true"
+                       style="-fx-border-color: black; -fx-border-width: 2;" />
+            <Label text="Item 1" style="-fx-font-size: 14px;" />
+            <Label fx:id="item1Quantity" text="x1" style="-fx-font-size: 14px;" />
+        </VBox>
+        <!-- Item 2 -->
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1">
+            <ImageView fx:id="item2Image" fitWidth="100" fitHeight="100" preserveRatio="true"
+                       style="-fx-border-color: black; -fx-border-width: 2;" />
+            <Label text="Item 2" style="-fx-font-size: 14px;" />
+            <Label fx:id="item2Quantity" text="x1" style="-fx-font-size: 14px;" />
+        </VBox>
+        <!-- Item 3 -->
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="2">
+            <ImageView fx:id="item3Image" fitWidth="100" fitHeight="100" preserveRatio="true"
+                       style="-fx-border-color: black; -fx-border-width: 2;" />
+            <Label text="Item 3" style="-fx-font-size: 14px;" />
+            <Label fx:id="item3Quantity" text="x1" style="-fx-font-size: 14px;" />
+        </VBox>
+        <!-- Item 4 -->
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="3">
+            <ImageView fx:id="item4Image" fitWidth="100" fitHeight="100" preserveRatio="true"
+                       style="-fx-border-color: black; -fx-border-width: 2;" />
+            <Label text="Item 4" style="-fx-font-size: 14px;" />
+            <Label fx:id="item4Quantity" text="x1" style="-fx-font-size: 14px;" />
+        </VBox>
+    </GridPane>
+
+    <!-- Go Back Button -->
+    <Button fx:id="goBackButton" text="Go Back" style="-fx-font-size: 14px;" onAction="#goBack" />
+</VBox>

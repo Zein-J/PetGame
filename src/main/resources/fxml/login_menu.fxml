@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.controller.LoginController"
+      alignment="CENTER"
+      spacing="15"
+      style="-fx-padding: 20; -fx-font-family: Arial;">
+
+    <!-- Title -->
+    <Label text="Parent Login" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+    <!-- User Section -->
+    <VBox spacing="5" alignment="CENTER_LEFT">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="User" style="-fx-font-size: 16px;" />
+            <TextField fx:id="usernameField" promptText="Enter username" />
+        </HBox>
+        <Label fx:id="userError" text="Invalid user" visible="false" style="-fx-text-fill: red; -fx-font-size: 12px;" />
+    </VBox>
+
+    <!-- Password Section -->
+    <VBox spacing="5" alignment="CENTER_LEFT">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Password" style="-fx-font-size: 16px;" />
+            <PasswordField fx:id="passwordField" promptText="Enter password" />
+        </HBox>
+        <Label fx:id="passwordError" text="Invalid password" visible="false" style="-fx-text-fill: red; -fx-font-size: 12px;" />
+    </VBox>
+
+    <!-- Buttons Section -->
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="loginButton" text="Login" onAction="#handleLogin" style="-fx-font-size: 14px;" />
+        <Button fx:id="goBackButton" text="Go Back" onAction="#goBack" style="-fx-font-size: 14px;" />
+    </HBox>
+</VBox>

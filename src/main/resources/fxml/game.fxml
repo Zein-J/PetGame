@@ -73,5 +73,7 @@
         <!-- Save Button -->
         <Button fx:id="saveButton" text="Save" onAction="#saveGame" styleClass="action-button" />
     </HBox>
+    <Label fx:id="playTimeLabel" text="Play Time: 00:00:00" style="-fx-font-size: 16px;" />
+
 
 </VBox>
