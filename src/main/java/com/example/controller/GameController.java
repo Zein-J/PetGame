@@ -38,7 +38,6 @@ public class GameController {
 
     private Timeline animation;
     private Timeline statsDecayTimeline;
-    private Timeline statsDecayTimeline;
     private Random random = new Random();
 
     /**
@@ -207,6 +206,7 @@ public class GameController {
     @FXML
     private void openInventory(){
         System.out.println("Inventory has not been made yet");
+        stopStatsDecay();
         if (animation != null) {
             animation.stop();
         }

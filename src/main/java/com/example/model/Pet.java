@@ -13,8 +13,6 @@ public class Pet {
 
     private Inventory inventory;
     private int saveID;
-    private int[] states;
-
     private boolean parentalControl;
 
     /**
@@ -74,6 +72,9 @@ public class Pet {
      * @return The {@link Inventory} object representing the pet's inventory.
      */
     public Inventory getInventory() {return inventory;}
+
+    public boolean getParentalControl() {return parentalControl;}
+    public void setParentalControl(boolean switchP) {this.parentalControl = switchP; }
 
     public boolean getParentalControl() {return parentalControl;}
     public void setParentalControl(boolean switchP) {this.parentalControl = switchP; }
