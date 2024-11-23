@@ -14,6 +14,7 @@ public class Pet {
     private Inventory inventory;
     private int saveID;
 
+
     /**
      * Default no-arguments constructor.
      * Required for Jackson JSON serialization/deserialization.
@@ -35,6 +36,7 @@ public class Pet {
         this.stats = new VitalStats();
         this.inventory = new Inventory();
         this.saveID = saveID;
+
     }
 
     /**
@@ -70,6 +72,7 @@ public class Pet {
      * @return The {@link Inventory} object representing the pet's inventory.
      */
     public Inventory getInventory() {return inventory;}
+
 
     public void performAction(PetAction action) {
         action.execute(stats);

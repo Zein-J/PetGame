@@ -10,9 +10,12 @@ import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 import java.io.IOException;
 import java.io.File;
+import java.util.Arrays;
+
 import com.example.model.GameState;
 import com.example.model.Pet;
 import com.example.util.FileHandler;
+import com.example.components.CustomButton;
 
 /**
  * Controller for the save game menu interface.
@@ -53,6 +56,7 @@ public class SaveMenuController {
 
         // Load existing save files and update slots with saved pet names
         File[] saveFiles = fileHandler.getSaveFiles();
+        System.out.println(Arrays.toString(saveFiles));
         if (saveFiles != null) {
             for (File file : saveFiles) {
                 String fileName = file.getName();
@@ -95,9 +99,9 @@ public class SaveMenuController {
      */
     private void setupCustomListCells() {
         saveSlotList.setCellFactory(lv -> new ListCell<String>() {
-            private final Button playButton = new Button("PLAY");
-            private final Button editButton = new Button("EDIT");
-            private final Button deleteButton = new Button("DELETE");
+            private final CustomButton playButton = new CustomButton("PLAY");
+            private final CustomButton editButton = new CustomButton("EDIT");
+            private final CustomButton deleteButton = new CustomButton("DELETE");
             private final HBox buttons = new HBox(10, playButton, editButton, deleteButton);
             private final HBox content = new HBox(20);
 

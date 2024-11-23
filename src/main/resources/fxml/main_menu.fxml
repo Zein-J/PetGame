@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import com.example.components.CustomButton?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.controller.MainMenuController"
            styleClass="main-menu-background">
     <VBox alignment="CENTER" spacing="20">
-        <!-- <Button fx:id="newGameButton" text="New Game" onAction="#startNewGame" styleClass="menu-button"/> -->
-        <Button fx:id="loadGameButton" text="Start Game" onAction="#startGame" styleClass="menu-button"/>
-        <Button fx:id="settingsButton" text="Settings" onAction="#openSettings" styleClass="menu-button"/>
-        <Button fx:id="exitButton" text="Exit" onAction="#exitGame" styleClass="menu-button"/>
+        <CustomButton fx:id="loadGameButton" text="Start Game" onAction="#startGame" styleClass="menu-button"/>
+        <CustomButton fx:id="settingsButton" text="Settings" onAction="#openSettings" styleClass="menu-button"/>
+        <CustomButton fx:id="exitButton" text="Exit" onAction="#exitGame" styleClass="menu-button"/>
     </VBox>
 </StackPane>

@@ -7,7 +7,7 @@ public class VitalStats {
     private final IntegerProperty hunger = new SimpleIntegerProperty(80);      // Default: well-fed
     private final IntegerProperty happiness = new SimpleIntegerProperty(70);  // Default: fairly happy
     private final IntegerProperty energy = new SimpleIntegerProperty(100);    // Default: fully energized
-    private final IntegerProperty hygiene = new SimpleIntegerProperty(100);   // Default: pristine
+    private final IntegerProperty health = new SimpleIntegerProperty(100);   // Default: healthy
 
     // Getters for properties
     public IntegerProperty hungerProperty() {
@@ -22,8 +22,8 @@ public class VitalStats {
         return energy;
     }
 
-    public IntegerProperty hygieneProperty() {
-        return hygiene;
+    public IntegerProperty healthProperty() {
+        return health;
     }
 
     // Getters and setters for values
@@ -51,22 +51,22 @@ public class VitalStats {
         energy.set(clampValue(value));
     }
 
-    public int getHygiene() {
-        return hygiene.get();
+    public int getHealth() {
+        return health.get();
     }
 
-    public void setHygiene(int value) {
-        hygiene.set(clampValue(value));
+    public void setHealth(int value) {
+        health.set(clampValue(value));
     }
 
     // Adjust methods
 
-    public void increaseHygiene(int value) {
-        hygiene.set(Math.min(100, hygiene.get() + value));
+    public void increaseHealth(int value) {
+        health.set(Math.min(100, health.get() + value));
     }
 
-    public void decreaseHygiene(int value) {
-        hygiene.set(Math.max(0, hygiene.get() - value));
+    public void decreaseHealth(int value) {
+        health.set(Math.max(0, health.get() - value));
     }
 
     public void increaseHunger(int value) {

@@ -23,8 +23,8 @@
 
             <!-- Sleep Bar -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="HYGIENE" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
-                <ProgressBar fx:id="hygieneBar" prefWidth="150" progress="0.5" />
+                <Label text="HEALTH" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <ProgressBar fx:id="healthBar" prefWidth="150" progress="0.5" />
             </HBox>
 
             <!-- Hunger Bar -->
@@ -73,5 +73,7 @@
         <!-- Save Button -->
         <Button fx:id="saveButton" text="Save" onAction="#saveGame" styleClass="action-button" />
     </HBox>
+    <Label fx:id="playTimeLabel" text="Play Time: 00:00:00" style="-fx-font-size: 16px;" />
+
 
 </VBox>

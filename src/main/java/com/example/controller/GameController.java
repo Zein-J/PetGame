@@ -21,7 +21,6 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.Random;
 
-//TODO: Rewrite this whole file
 /**
  * Controller class responsible for managing the game scene/view.
  * This class handles the mole animation, sprite rendering, and navigation
@@ -31,13 +30,14 @@ public class GameController {
 
 
     public ProgressBar energyBar;
-    public ProgressBar hygieneBar;
+    public ProgressBar healthBar;
     public ProgressBar hungerBar;
     public ProgressBar happinessBar;
     @FXML
     private ImageView moleSprite;
 
     private Timeline animation;
+    private Timeline statsDecayTimeline;
     private Random random = new Random();
 
     /**
@@ -65,7 +65,7 @@ public class GameController {
 
             // Bind progress bars to stats
             energyBar.progressProperty().bind(Bindings.divide(stats.energyProperty(), 100.0));
-            hygieneBar.progressProperty().bind(Bindings.divide(stats.hygieneProperty(), 100.0));
+            healthBar.progressProperty().bind(Bindings.divide(stats.healthProperty(), 100.0));
             hungerBar.progressProperty().bind(Bindings.divide(stats.hungerProperty(), 100.0));
             happinessBar.progressProperty().bind(Bindings.divide(stats.happinessProperty(), 100.0));
 
@@ -88,10 +88,46 @@ public class GameController {
         } catch (Exception e) {
             System.err.println("Error in initialize: " + e.getMessage());
             e.printStackTrace();
-
         }
+        startStatsDecay();
+    }
+    /**
+     * Starts the timeline for the constant decay of stats.
+     */
+    private void startStatsDecay() {
+        statsDecayTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            GameState gameState = GameState.getCurrentState();
+            Pet pet = gameState.getPet();
+
+            if (pet != null) {
+                VitalStats stats = pet.getStats();
+
+                // Decay the stats
+                stats.decreaseEnergy(1);   // Decrease energy by 1 every second
+                stats.decreaseHealth(1);  // Decrease hygiene by 1 every second
+                stats.decreaseHunger(1);   // Decrease hunger by 1 every second
+                stats.decreaseHappiness(1); // Decrease happiness by 1 every second
+
+                // Log the changes (for debugging)
+                System.out.println("Stats Decayed: Energy=" + stats.getEnergy() +
+                        ", Health=" + stats.getHealth() +
+                        ", Hunger=" + stats.getHunger() +
+                        ", Happiness=" + stats.getHappiness());
+            }
+        }));
+
+        statsDecayTimeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
+        statsDecayTimeline.play(); // Start the timeline
     }
 
+    /**
+     * Stops the timeline for stats decay.
+     */
+    private void stopStatsDecay() {
+        if (statsDecayTimeline != null) {
+            statsDecayTimeline.stop();
+        }
+    }
 
     /**
      * Event handler for the back button.
@@ -99,6 +135,7 @@ public class GameController {
      */
     @FXML
     private void goBack() {
+        stopStatsDecay();
         if (animation != null) {
             animation.stop();
         }
@@ -158,8 +195,8 @@ public class GameController {
 
         if (pet != null) {
             VitalStats stats = pet.getStats();
-            stats.increaseHygiene(50); // Increase hygiene
-            stats.increaseEnergy(30); // Increase health
+            stats.increaseHealth(50); // Increase health
+            stats.increaseEnergy(30); // Increase energy
             stats.decreaseHappiness(10); // Decrease happiness
             System.out.println(pet.getName() + " went to the vet! Health and hygiene increased, but happiness decreased.");
         } else {
@@ -167,7 +204,14 @@ public class GameController {
         }
     }
     @FXML
-    private void openInventory(){System.out.println("Inventory has not been made yet");}
+    private void openInventory(){
+        System.out.println("Inventory has not been made yet");
+        stopStatsDecay();
+        if (animation != null) {
+            animation.stop();
+        }
+        SceneController.getInstance().switchToInventory();
+    }
     @FXML
     private void saveGame() {
         GameState gameState = GameState.getCurrentState();
