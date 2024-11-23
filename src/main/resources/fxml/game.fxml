@@ -6,19 +6,72 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.controller.GameController"
-      spacing="10" alignment="CENTER" styleClass="game">
+      spacing="20" alignment="CENTER" styleClass="game"
+      style="-fx-padding: 20; -fx-background-color: #90EE90;">
 
-    <StackPane VBox.vgrow="ALWAYS">
-        <ImageView fx:id="moleSprite"
-                  fitWidth="300"
-                  fitHeight="300"
-                  preserveRatio="true"
-                  styleClass="mole-sprite">
-            <image>
-                <Image url="@../images/mole.png" />
-            </image>
-        </ImageView>
-    </StackPane>
+    <!-- Main Row: Status, Mole Image, and Actions -->
+    <HBox spacing="50" alignment="CENTER" style="-fx-padding: 20;">
+        <!-- Status Section -->
+        <VBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 10;">
+            <Label text="Status" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
 
-    <Button fx:id="backButton" text="Back" onAction="#goBack" />
+            <!-- Health Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="ENERGY" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <ProgressBar fx:id="energyBar" prefWidth="150" progress="0.7" />
+            </HBox>
+
+            <!-- Sleep Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="HYGIENE" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <ProgressBar fx:id="hygieneBar" prefWidth="150" progress="0.5" />
+            </HBox>
+
+            <!-- Hunger Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="HUNGER" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <ProgressBar fx:id="hungerBar" prefWidth="150" progress="0.3" />
+            </HBox>
+
+            <!-- Happiness Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="HAPPINESS" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <ProgressBar fx:id="happinessBar" prefWidth="150" progress="0.8" />
+            </HBox>
+        </VBox>
+
+        <!-- Mole Image -->
+        <StackPane alignment="CENTER">
+            <ImageView fx:id="moleSprite"
+                       fitWidth="300"
+                       fitHeight="300"
+                       preserveRatio="true"
+                       styleClass="mole-sprite">
+                <image>
+                    <Image url="@../images/mole.png" />
+                </image>
+            </ImageView>
+        </StackPane>
+
+        <!-- Action Buttons -->
+        <VBox spacing="15" alignment="CENTER" style="-fx-padding: 0 20;">
+            <Label text="Actions" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Button fx:id="feedButton" text="Feed" onAction="#feedPet" styleClass="action-button" />
+            <Button fx:id="playButton" text="Play" onAction="#playPet" styleClass="action-button" />
+            <Button fx:id="giftButton" text="Give Gift" onAction="#giveGift" styleClass="action-button" />
+            <Button fx:id="exerciseButton" text="Exercise" onAction="#exercisePet" styleClass="action-button" />
+            <Button fx:id="vetButton" text="Take to Vet" onAction="#takeVet" styleClass="action-button" />
+            <Button fx:id="inventoryButton" text="Inventory" onAction="#openInventory" styleClass="action-button" />
+        </VBox>
+    </HBox>
+
+    <!-- Back Button -->
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+        <!-- Back Button -->
+        <Button fx:id="backButton" text="Back" onAction="#goBack" styleClass="back-button" />
+
+        <!-- Save Button -->
+        <Button fx:id="saveButton" text="Save" onAction="#saveGame" styleClass="action-button" />
+    </HBox>
+
 </VBox>

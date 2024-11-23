@@ -11,11 +11,13 @@ import javafx.animation.Timeline;
 import javafx.animation.Interpolator;
 import javafx.animation.SequentialTransition;
 
-// Controller class for the main menu interface
+/**
+ * Controller class for the main menu interface.
+ * Manages button animations, transitions between scenes, and user interactions
+ * on the main menu screen.
+ */
 public class MainMenuController {
-    // FXML injected button elements from the UI
-    @FXML
-    private Button newGameButton;
+
     @FXML
     private Button loadGameButton;
     @FXML
@@ -23,74 +25,80 @@ public class MainMenuController {
     @FXML
     private Button exitButton;
 
-    // Initializes the controller and sets up animations for all buttons
+    /**
+     * Initializes the controller and sets up animations for all buttons.
+     * This method is automatically called after the FXML file is loaded.
+     */
     @FXML
     public void initialize() {
-        setupHoverAnimation(newGameButton);
         setupHoverAnimation(loadGameButton);
         setupHoverAnimation(settingsButton);
         setupHoverAnimation(exitButton);
     }
 
-    // Sets up interactive animations for button hover, click, and release effects
+    /**
+     * Sets up interactive animations for button hover, click, and release effects.
+     * This includes scaling the button, adding color effects, and restoring the
+     * button's original state on hover end or click release.
+     *
+     * @param button The button for which animations will be applied.
+     */
     private void setupHoverAnimation(Button button) {
         // Create a sequence of animations for hover effect
         SequentialTransition hoverAnimation = new SequentialTransition(button);
-        
+
         // First hover animation: Scale up to 110%
         ScaleTransition scaleUpBig = new ScaleTransition(Duration.millis(150));
         scaleUpBig.setToX(1.1);
         scaleUpBig.setToY(1.1);
         scaleUpBig.setInterpolator(Interpolator.EASE_OUT);
-        
+
         // Second hover animation: Scale back to 105%
         ScaleTransition scaleUpSmall = new ScaleTransition(Duration.millis(100));
         scaleUpSmall.setToX(1.05);
         scaleUpSmall.setToY(1.05);
         scaleUpSmall.setInterpolator(Interpolator.EASE_OUT);
-        
+
         hoverAnimation.getChildren().addAll(scaleUpBig, scaleUpSmall);
 
         // Create a sequence of animations for mouse exit
         SequentialTransition exitAnimation = new SequentialTransition(button);
-        
+
         // First exit animation: Scale down to 95%
         ScaleTransition scaleDownBig = new ScaleTransition(Duration.millis(150));
         scaleDownBig.setToX(0.95);
         scaleDownBig.setToY(0.95);
         scaleDownBig.setInterpolator(Interpolator.EASE_OUT);
-        
+
         // Second exit animation: Return to original size
         ScaleTransition scaleDownSmall = new ScaleTransition(Duration.millis(100));
         scaleDownSmall.setToX(1.0);
         scaleDownSmall.setToY(1.0);
         scaleDownSmall.setInterpolator(Interpolator.EASE_OUT);
-        
+
         exitAnimation.getChildren().addAll(scaleDownBig, scaleDownSmall);
 
         // Animation for when button is clicked (pressed)
         SequentialTransition clickAnimation = new SequentialTransition(button);
-        // Scale down to 80% when clicked
         ScaleTransition scaleClick = new ScaleTransition(Duration.millis(100));
         scaleClick.setToX(0.8);
         scaleClick.setToY(0.8);
         scaleClick.setInterpolator(Interpolator.EASE_OUT);
-        
+
         clickAnimation.getChildren().add(scaleClick);
 
         // Animation for when button is released
         SequentialTransition releaseAnimation = new SequentialTransition(button);
-        // Scale back to 110% when released
         ScaleTransition scaleReleaseBig = new ScaleTransition(Duration.millis(150));
         scaleReleaseBig.setToX(1.1);
         scaleReleaseBig.setToY(1.1);
         scaleReleaseBig.setInterpolator(Interpolator.EASE_OUT);
-        
+
         ScaleTransition scaleReleaseSmall = new ScaleTransition(Duration.millis(100));
         scaleReleaseSmall.setToX(1.0);
         scaleReleaseSmall.setToY(1.0);
         scaleReleaseSmall.setInterpolator(Interpolator.EASE_OUT);
-        
+
         releaseAnimation.getChildren().addAll(scaleReleaseBig, scaleReleaseSmall);
 
         // Set up color adjustment effect for hover
@@ -130,31 +138,30 @@ public class MainMenuController {
         });
     }
 
-    // Handler for starting a new game
+    /**
+     * Handles the "Load Game" button action.
+     * Switches to the save menu scene.
+     */
     @FXML
-    private void startNewGame() {
-        // Switch to the game scene
-        SceneController.getInstance().switchToGame();
-    }
-
-    // Handler for loading a saved game
-    @FXML
-    private void loadGame() {
-        // Switch to the save menu scene
+    private void startGame() {
         SceneController.getInstance().switchToSaveMenu();
     }
 
-    // Handler for opening settings menu
+    /**
+     * Handles the "Settings" button action.
+     * Switches to the settings menu scene.
+     */
     @FXML
     private void openSettings() {
-        // Switch to the settings scene
         SceneController.getInstance().switchToSettings();
     }
 
-    // Handler for exiting the game
+    /**
+     * Handles the "Exit" button action.
+     * Terminates the application.
+     */
     @FXML
     private void exitGame() {
-        // Terminate the application
         System.exit(0);
     }
 }

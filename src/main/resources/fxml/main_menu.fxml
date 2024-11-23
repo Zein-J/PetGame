@@ -8,8 +8,8 @@
            fx:controller="com.example.controller.MainMenuController"
            styleClass="main-menu-background">
     <VBox alignment="CENTER" spacing="20">
-        <Button fx:id="newGameButton" text="New Game" onAction="#startNewGame" styleClass="menu-button"/>
-        <Button fx:id="loadGameButton" text="Load Game" onAction="#loadGame" styleClass="menu-button"/>
+        <!-- <Button fx:id="newGameButton" text="New Game" onAction="#startNewGame" styleClass="menu-button"/> -->
+        <Button fx:id="loadGameButton" text="Start Game" onAction="#startGame" styleClass="menu-button"/>
         <Button fx:id="settingsButton" text="Settings" onAction="#openSettings" styleClass="menu-button"/>
         <Button fx:id="exitButton" text="Exit" onAction="#exitGame" styleClass="menu-button"/>
     </VBox>
