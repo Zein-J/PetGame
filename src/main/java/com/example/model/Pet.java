@@ -15,6 +15,7 @@ public class Pet {
     private int saveID;
     private int[] states;
 
+    private boolean parentalControl;
 
     /**
      * Default no-arguments constructor.
@@ -37,7 +38,7 @@ public class Pet {
         this.stats = new VitalStats();
         this.inventory = new Inventory();
         this.saveID = saveID;
-
+        this.parentalControl = false;
     }
 
     /**
@@ -74,11 +75,9 @@ public class Pet {
      */
     public Inventory getInventory() {return inventory;}
 
-    // Called when a stat threshold is reached
-    private void handleThreshold() {
-        System.out.println("Threshold reached for " + name + ". Consider taking action!");
-        // Add additional logic, e.g., changing pet mood or triggering events
-    }
+    public boolean getParentalControl() {return parentalControl;}
+    public void setParentalControl(boolean switchP) {this.parentalControl = switchP; }
+
     public void performAction(PetAction action) {
         action.execute(stats);
     }

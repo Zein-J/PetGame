@@ -38,6 +38,7 @@ public class GameController {
 
     private Timeline animation;
     private Timeline statsDecayTimeline;
+    private Timeline statsDecayTimeline;
     private Random random = new Random();
 
     /**
@@ -90,8 +91,6 @@ public class GameController {
             e.printStackTrace();
         }
         startStatsDecay();
-
-
     }
     /**
      * Starts the timeline for the constant decay of stats.
@@ -103,64 +102,18 @@ public class GameController {
 
             if (pet != null) {
                 VitalStats stats = pet.getStats();
-                // Initialize species-specific modifiers
-                int speciesHungerMod = 0;
-                int speciesHappinessMod = 0;
-                int speciesEnergyMod = 0;
-                int speciesHealthMod = 0;
-
-                // Apply species-specific modifiers
-                switch (pet.getSpecies()) {
-                    case "cat":
-                        speciesHungerMod = -1; // Eats less food
-                        speciesHappinessMod = 0; // Happiness decays normally
-                        speciesEnergyMod = 1; // Loses energy faster
-                        speciesHealthMod = 0;   // Health decays normally
-                        break;
-                        //TODO: why is B capitalized
-                    case "Bear":
-                        speciesHungerMod = 2; // Hunger decreases rapidly
-                        speciesHappinessMod = -1; // Happiness decays slower
-                        speciesEnergyMod = 1;  // Energy decays normally
-                        speciesHealthMod = 0; // Health decays slower
-                        break;
-                    case "mole":
-                        // Mole is the default (no modifiers)
-                        speciesHungerMod = 0;
-                        speciesHappinessMod = 0;
-                        speciesEnergyMod = 0;
-                        speciesHealthMod = 0;
-                        break;
-                    default:
-                        System.out.println("Unknown species: " + pet.getSpecies());
-                        break;
-                }
-
-
 
                 // Decay the stats
-                stats.decreaseEnergy(2+ speciesEnergyMod);   // Decrease energy by 1 every second
-                stats.decreaseHealth(2+ speciesHealthMod);  // Decrease health by 1 every second
-                stats.decreaseHunger(2+ speciesHungerMod);   // Decrease hunger by 1 every second
-                stats.decreaseHappiness(2+ speciesHappinessMod); // Decrease happiness by 1 every second
+                stats.decreaseEnergy(1);   // Decrease energy by 1 every second
+                stats.decreaseHygiene(1);  // Decrease hygiene by 1 every second
+                stats.decreaseHunger(1);   // Decrease hunger by 1 every second
+                stats.decreaseHappiness(1); // Decrease happiness by 1 every second
 
                 // Log the changes (for debugging)
                 System.out.println("Stats Decayed: Energy=" + stats.getEnergy() +
-                        ", Health=" + stats.getHealth() +
+                        ", Hygiene=" + stats.getHygiene() +
                         ", Hunger=" + stats.getHunger() +
                         ", Happiness=" + stats.getHappiness());
-
-                // Check the petState array for critical states
-                int[] petState = stats.getState();
-                if (petState[3] == 1) {
-                    handleCriticalState(3);
-                    return; // Ignore other states if Hunger is critical
-                }
-                for (int i = 0; i < petState.length-1; i++) {
-                    if (petState[i] == 1) {
-                        handleCriticalState(i); // Handle each critical state
-                    }
-                }
             }
         }));
 
@@ -254,6 +207,7 @@ public class GameController {
     @FXML
     private void openInventory(){
         System.out.println("Inventory has not been made yet");
+        stopStatsDecay();
         if (animation != null) {
             animation.stop();
         }

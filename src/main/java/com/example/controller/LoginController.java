@@ -53,7 +53,6 @@ public class LoginController {
     @FXML
     private void goBack() {
         System.out.println("Returning to the previous screen...");
-        SceneController.getInstance().switchToSettings();
         // Logic to switch to the previous screen
     }
 }

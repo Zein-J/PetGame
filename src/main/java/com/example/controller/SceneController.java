@@ -73,6 +73,9 @@ public class SceneController {
     public void switchToInventory() {
         loadFXML("inventory_menu.fxml");
     }
+    public void switchToLoginParent() {loadFXML("login_menu.fxml");}
+
+    public void switchToParentMenu() {loadFXML("parent_menu.fxml");}
 
     /**
      * Retrieves the current active scene.
