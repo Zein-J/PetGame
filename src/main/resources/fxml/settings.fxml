@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import com.example.components.CustomSlider?>
+<?import com.example.components.CustomToggle?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.controller.SettingsController"
@@ -12,17 +14,16 @@
 
     <HBox spacing="15" alignment="CENTER">
         <Label text="Parental Controls" styleClass="subtitle-label"/>
-        <ToggleButton fx:id="parentalControlsToggle" styleClass="toggle"/>
+        <CustomToggle fx:id="parentalControlsToggle"/>
     </HBox>
+
+    <Button text="Parental Controls"
+            onAction="#goParent"
+            styleClass="back-button"/>
 
     <HBox spacing="15" alignment="CENTER">
         <Label text="Sound Volume" styleClass="subtitle-label"/>
-        <Slider fx:id="volumeSlider" 
-                min="0" max="100" value="50"
-                styleClass="volume-slider"
-                prefWidth="150"
-                showTickLabels="false"
-                showTickMarks="false"/>
+        <CustomSlider fx:id="volumeSlider" prefWidth="200"/>
     </HBox>
 
     <Button text="Back to Main Menu" 

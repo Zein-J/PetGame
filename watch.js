@@ -11,16 +11,24 @@ const watcher = chokidar.watch([
   ignored: APP_PATH
 });
 
-console.log("Watching for changes...");
+console.log("watching for changes...");
 
 watcher.on("change", (path) => {
-  console.log(`File ${path} has been changed`);
+  console.log(`file ${path} has been changed`);
   
-  exec(`touch ${APP_PATH}`, (error) => {
+  // run maven compile instead of just touching the file
+  exec("mvn compile", (error) => {
     if (error) {
-      console.error(`Error touching App.java: ${error}`);
+      console.error(`error compiling: ${error}`);
       return;
     }
-    console.log("Recompiling...");
+    console.log("recompiling...");
+    
+    // touch App.java to trigger reload
+    exec(`touch ${APP_PATH}`, (error) => {
+      if (error) {
+        console.error(`error touching App.java: ${error}`);
+      }
+    });
   });
 });

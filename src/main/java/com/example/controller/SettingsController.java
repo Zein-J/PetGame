@@ -7,6 +7,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.StackPane;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import com.example.components.CustomSlider;
+import com.example.components.CustomToggle;
 
 /**
  * Controller class for managing game settings and preferences.
@@ -17,7 +19,7 @@ public class SettingsController {
     private ToggleButton parentalControlsToggle;
 
     @FXML
-    private Slider volumeSlider;
+    private CustomSlider volumeSlider;
 
     private Rectangle coloredTrack;
 
@@ -35,7 +37,7 @@ public class SettingsController {
 
         // Listener for volume slider value changes
         volumeSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            handleVolumeChange(newVal.doubleValue());
+            handleVolumeChange(newVal.intValue());
         });
 
         // Delayed setup for the volume slider after the scene loads
@@ -93,10 +95,10 @@ public class SettingsController {
     /**
      * Handles changes to the volume slider value.
      *
-     * @param volume The new volume level as a double between the slider's minimum and maximum.
+     * @param volume The new volume level as an integer between the slider's minimum and maximum.
      */
-    private void handleVolumeChange(double volume) {
-        System.out.println("Volume set to: " + volume);
+    private void handleVolumeChange(int volume) {
+        System.out.println("Volume: " + volume + "%");
     }
 
     /**
@@ -106,4 +108,7 @@ public class SettingsController {
     private void goBack() {
         SceneController.getInstance().switchToMainMenu();
     }
+
+    @FXML
+    private void goParent(){SceneController.getInstance().switchToLoginParent();}
 }

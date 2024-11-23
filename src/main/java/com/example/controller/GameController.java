@@ -38,6 +38,7 @@ public class GameController {
     private ImageView moleSprite;
 
     private Timeline animation;
+    private Timeline statsDecayTimeline;
     private Random random = new Random();
 
     /**
@@ -88,10 +89,46 @@ public class GameController {
         } catch (Exception e) {
             System.err.println("Error in initialize: " + e.getMessage());
             e.printStackTrace();
-
         }
+        startStatsDecay();
+    }
+    /**
+     * Starts the timeline for the constant decay of stats.
+     */
+    private void startStatsDecay() {
+        statsDecayTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            GameState gameState = GameState.getCurrentState();
+            Pet pet = gameState.getPet();
+
+            if (pet != null) {
+                VitalStats stats = pet.getStats();
+
+                // Decay the stats
+                stats.decreaseEnergy(1);   // Decrease energy by 1 every second
+                stats.decreaseHygiene(1);  // Decrease hygiene by 1 every second
+                stats.decreaseHunger(1);   // Decrease hunger by 1 every second
+                stats.decreaseHappiness(1); // Decrease happiness by 1 every second
+
+                // Log the changes (for debugging)
+                System.out.println("Stats Decayed: Energy=" + stats.getEnergy() +
+                        ", Hygiene=" + stats.getHygiene() +
+                        ", Hunger=" + stats.getHunger() +
+                        ", Happiness=" + stats.getHappiness());
+            }
+        }));
+
+        statsDecayTimeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
+        statsDecayTimeline.play(); // Start the timeline
     }
 
+    /**
+     * Stops the timeline for stats decay.
+     */
+    private void stopStatsDecay() {
+        if (statsDecayTimeline != null) {
+            statsDecayTimeline.stop();
+        }
+    }
 
     /**
      * Event handler for the back button.
@@ -99,6 +136,7 @@ public class GameController {
      */
     @FXML
     private void goBack() {
+        stopStatsDecay();
         if (animation != null) {
             animation.stop();
         }
@@ -167,7 +205,14 @@ public class GameController {
         }
     }
     @FXML
-    private void openInventory(){System.out.println("Inventory has not been made yet");}
+    private void openInventory(){
+        System.out.println("Inventory has not been made yet");
+        stopStatsDecay();
+        if (animation != null) {
+            animation.stop();
+        }
+        SceneController.getInstance().switchToInventory();
+    }
     @FXML
     private void saveGame() {
         GameState gameState = GameState.getCurrentState();

@@ -191,25 +191,35 @@
     -fx-padding: 20;
 }
 
-.volume-slider {
+.custom-slider {
     -fx-background-color: transparent;
+    -fx-padding: 10 30 10 10;
 }
 
-.volume-slider .track {
-    -fx-background-color: #e9e9eb;
-    -fx-background-radius: 4;
-    -fx-pref-height: 8;
+.custom-slider .slider-track {
+    -fx-fill: #e9e9eb;
 }
 
-.volume-slider .thumb {
-    -fx-background-color: #34c759;
-    -fx-background-radius: 8;
-    -fx-pref-height: 16;
-    -fx-pref-width: 16;
-}
-
-.volume-slider .colored-track {
+.custom-slider .slider-progress-track {
     -fx-fill: #34c759;
-    -fx-stroke-width: 0;
-    -fx-background-radius: 4;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+.custom-slider .slider-thumb {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+    -fx-effect: none;
+}
+
+.custom-slider:hover .slider-thumb {
+    -fx-effect: none;
+}
+
+.custom-slider:pressed .slider-thumb {
+    -fx-fill: transparent;
+    -fx-effect: none;
+}
+
+.custom-slider:disabled {
+    -fx-opacity: 0.4;
 }
