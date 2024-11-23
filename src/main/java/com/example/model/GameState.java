@@ -34,6 +34,10 @@ public class GameState {
     private Duration totalPlayTime;        // Total time played
 
 
+    private LocalDateTime sessionStartTime; // When the session started
+    private Duration totalPlayTime;        // Total time played
+
+
     /**
      * Constructor initializes a new game state with the current timestamp.
      * Sets the {@code savedAt} field to the current date and time.

@@ -38,6 +38,7 @@ public class GameController {
 
     private Timeline animation;
     private Timeline statsDecayTimeline;
+    private Timeline statsDecayTimeline;
     private Random random = new Random();
 
     /**
