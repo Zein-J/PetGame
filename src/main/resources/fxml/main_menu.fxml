@@ -6,10 +6,11 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.controller.MainMenuController"
-           styleClass="main-menu-background">
+           styleClass="main-menu-background"
+           stylesheets="@../styles/main_menu.css">
     <VBox alignment="CENTER" spacing="20">
-        <CustomButton fx:id="loadGameButton" text="Start Game" onAction="#startGame" styleClass="menu-button"/>
-        <CustomButton fx:id="settingsButton" text="Settings" onAction="#openSettings" styleClass="menu-button"/>
-        <CustomButton fx:id="exitButton" text="Exit" onAction="#exitGame" styleClass="menu-button"/>
+        <CustomButton fx:id="loadGameButton" text="Start Game" onAction="#startGame" styleClass="custom-button"/>
+        <CustomButton fx:id="settingsButton" text="Settings" onAction="#openSettings" styleClass="custom-button"/>
+        <CustomButton fx:id="exitButton" text="Exit" onAction="#exitGame" styleClass="custom-button"/>
     </VBox>
 </StackPane>

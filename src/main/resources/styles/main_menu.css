@@ -1,0 +1,33 @@
+.root {
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-background-color: #38250e;
+}
+
+.custom-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-min-width: 200px;
+    -fx-padding: 15px;
+    -fx-background-radius: 5px;
+}
+
+.custom-button:hover {
+    -fx-cursor: hand;
+}
+
+.custom-toggle {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.custom-toggle:selected .background {
+    -fx-fill: #34c759;
+}
+
+.custom-toggle .thumb {
+    -fx-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+} 
