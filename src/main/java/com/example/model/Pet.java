@@ -13,6 +13,7 @@ public class Pet {
 
     private Inventory inventory;
     private int saveID;
+    private int[] states;
 
 
     /**
@@ -73,7 +74,11 @@ public class Pet {
      */
     public Inventory getInventory() {return inventory;}
 
-
+    // Called when a stat threshold is reached
+    private void handleThreshold() {
+        System.out.println("Threshold reached for " + name + ". Consider taking action!");
+        // Add additional logic, e.g., changing pet mood or triggering events
+    }
     public void performAction(PetAction action) {
         action.execute(stats);
     }
