@@ -46,6 +46,6 @@ public class InventoryController {
     @FXML
     private void goBack() {
         // Handle navigation back to the previous screen
-        SceneController.getInstance().switchToMainMenu();
+        SceneController.getInstance().switchToGame();
     }
 }
