@@ -13,7 +13,7 @@ public class Pet {
 
     private Inventory inventory;
     private int saveID;
-    private boolean parentalControl;
+
 
     /**
      * Default no-arguments constructor.
@@ -36,7 +36,7 @@ public class Pet {
         this.stats = new VitalStats();
         this.inventory = new Inventory();
         this.saveID = saveID;
-        this.parentalControl = false;
+
     }
 
     /**
@@ -73,8 +73,6 @@ public class Pet {
      */
     public Inventory getInventory() {return inventory;}
 
-    public boolean getParentalControl() {return parentalControl;}
-    public void setParentalControl(boolean switchP) {this.parentalControl = switchP; }
 
     public void performAction(PetAction action) {
         action.execute(stats);

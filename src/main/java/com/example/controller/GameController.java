@@ -21,7 +21,6 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.Random;
 
-//TODO: Rewrite this whole file
 /**
  * Controller class responsible for managing the game scene/view.
  * This class handles the mole animation, sprite rendering, and navigation
@@ -31,7 +30,7 @@ public class GameController {
 
 
     public ProgressBar energyBar;
-    public ProgressBar hygieneBar;
+    public ProgressBar healthBar;
     public ProgressBar hungerBar;
     public ProgressBar happinessBar;
     @FXML
@@ -66,7 +65,7 @@ public class GameController {
 
             // Bind progress bars to stats
             energyBar.progressProperty().bind(Bindings.divide(stats.energyProperty(), 100.0));
-            hygieneBar.progressProperty().bind(Bindings.divide(stats.hygieneProperty(), 100.0));
+            healthBar.progressProperty().bind(Bindings.divide(stats.healthProperty(), 100.0));
             hungerBar.progressProperty().bind(Bindings.divide(stats.hungerProperty(), 100.0));
             happinessBar.progressProperty().bind(Bindings.divide(stats.happinessProperty(), 100.0));
 
@@ -105,13 +104,13 @@ public class GameController {
 
                 // Decay the stats
                 stats.decreaseEnergy(1);   // Decrease energy by 1 every second
-                stats.decreaseHygiene(1);  // Decrease hygiene by 1 every second
+                stats.decreaseHealth(1);  // Decrease hygiene by 1 every second
                 stats.decreaseHunger(1);   // Decrease hunger by 1 every second
                 stats.decreaseHappiness(1); // Decrease happiness by 1 every second
 
                 // Log the changes (for debugging)
                 System.out.println("Stats Decayed: Energy=" + stats.getEnergy() +
-                        ", Hygiene=" + stats.getHygiene() +
+                        ", Health=" + stats.getHealth() +
                         ", Hunger=" + stats.getHunger() +
                         ", Happiness=" + stats.getHappiness());
             }
@@ -196,8 +195,8 @@ public class GameController {
 
         if (pet != null) {
             VitalStats stats = pet.getStats();
-            stats.increaseHygiene(50); // Increase hygiene
-            stats.increaseEnergy(30); // Increase health
+            stats.increaseHealth(50); // Increase health
+            stats.increaseEnergy(30); // Increase energy
             stats.decreaseHappiness(10); // Decrease happiness
             System.out.println(pet.getName() + " went to the vet! Health and hygiene increased, but happiness decreased.");
         } else {

@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 import java.io.IOException;
 import java.io.File;
+import java.util.Arrays;
+
 import com.example.model.GameState;
 import com.example.model.Pet;
 import com.example.util.FileHandler;
@@ -54,6 +56,7 @@ public class SaveMenuController {
 
         // Load existing save files and update slots with saved pet names
         File[] saveFiles = fileHandler.getSaveFiles();
+        System.out.println(Arrays.toString(saveFiles));
         if (saveFiles != null) {
             for (File file : saveFiles) {
                 String fileName = file.getName();

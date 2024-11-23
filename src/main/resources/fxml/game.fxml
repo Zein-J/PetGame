@@ -23,8 +23,8 @@
 
             <!-- Sleep Bar -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="HYGIENE" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
-                <ProgressBar fx:id="hygieneBar" prefWidth="150" progress="0.5" />
+                <Label text="HEALTH" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <ProgressBar fx:id="healthBar" prefWidth="150" progress="0.5" />
             </HBox>
 
             <!-- Hunger Bar -->
