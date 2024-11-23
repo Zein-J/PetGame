@@ -21,7 +21,6 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.Random;
 
-//TODO: Rewrite this whole file
 /**
  * Controller class responsible for managing the game scene/view.
  * This class handles the mole animation, sprite rendering, and navigation
@@ -31,13 +30,14 @@ public class GameController {
 
 
     public ProgressBar energyBar;
-    public ProgressBar hygieneBar;
+    public ProgressBar healthBar;
     public ProgressBar hungerBar;
     public ProgressBar happinessBar;
     @FXML
     private ImageView moleSprite;
 
     private Timeline animation;
+    private Timeline statsDecayTimeline;
     private Random random = new Random();
 
     /**
@@ -65,7 +65,7 @@ public class GameController {
 
             // Bind progress bars to stats
             energyBar.progressProperty().bind(Bindings.divide(stats.energyProperty(), 100.0));
-            hygieneBar.progressProperty().bind(Bindings.divide(stats.hygieneProperty(), 100.0));
+            healthBar.progressProperty().bind(Bindings.divide(stats.healthProperty(), 100.0));
             hungerBar.progressProperty().bind(Bindings.divide(stats.hungerProperty(), 100.0));
             happinessBar.progressProperty().bind(Bindings.divide(stats.happinessProperty(), 100.0));
 
@@ -88,10 +88,94 @@ public class GameController {
         } catch (Exception e) {
             System.err.println("Error in initialize: " + e.getMessage());
             e.printStackTrace();
-
         }
+        startStatsDecay();
+
+
+    }
+    /**
+     * Starts the timeline for the constant decay of stats.
+     */
+    private void startStatsDecay() {
+        statsDecayTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            GameState gameState = GameState.getCurrentState();
+            Pet pet = gameState.getPet();
+
+            if (pet != null) {
+                VitalStats stats = pet.getStats();
+                // Initialize species-specific modifiers
+                int speciesHungerMod = 0;
+                int speciesHappinessMod = 0;
+                int speciesEnergyMod = 0;
+                int speciesHealthMod = 0;
+
+                // Apply species-specific modifiers
+                switch (pet.getSpecies()) {
+                    case "cat":
+                        speciesHungerMod = -1; // Eats less food
+                        speciesHappinessMod = 0; // Happiness decays normally
+                        speciesEnergyMod = 1; // Loses energy faster
+                        speciesHealthMod = 0;   // Health decays normally
+                        break;
+                        //TODO: why is B capitalized
+                    case "Bear":
+                        speciesHungerMod = 2; // Hunger decreases rapidly
+                        speciesHappinessMod = -1; // Happiness decays slower
+                        speciesEnergyMod = 1;  // Energy decays normally
+                        speciesHealthMod = 0; // Health decays slower
+                        break;
+                    case "mole":
+                        // Mole is the default (no modifiers)
+                        speciesHungerMod = 0;
+                        speciesHappinessMod = 0;
+                        speciesEnergyMod = 0;
+                        speciesHealthMod = 0;
+                        break;
+                    default:
+                        System.out.println("Unknown species: " + pet.getSpecies());
+                        break;
+                }
+
+
+
+                // Decay the stats
+                stats.decreaseEnergy(2+ speciesEnergyMod);   // Decrease energy by 1 every second
+                stats.decreaseHealth(2+ speciesHealthMod);  // Decrease health by 1 every second
+                stats.decreaseHunger(2+ speciesHungerMod);   // Decrease hunger by 1 every second
+                stats.decreaseHappiness(2+ speciesHappinessMod); // Decrease happiness by 1 every second
+
+                // Log the changes (for debugging)
+                System.out.println("Stats Decayed: Energy=" + stats.getEnergy() +
+                        ", Health=" + stats.getHealth() +
+                        ", Hunger=" + stats.getHunger() +
+                        ", Happiness=" + stats.getHappiness());
+
+                // Check the petState array for critical states
+                int[] petState = stats.getState();
+                if (petState[3] == 1) {
+                    handleCriticalState(3);
+                    return; // Ignore other states if Hunger is critical
+                }
+                for (int i = 0; i < petState.length-1; i++) {
+                    if (petState[i] == 1) {
+                        handleCriticalState(i); // Handle each critical state
+                    }
+                }
+            }
+        }));
+
+        statsDecayTimeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
+        statsDecayTimeline.play(); // Start the timeline
     }
 
+    /**
+     * Stops the timeline for stats decay.
+     */
+    private void stopStatsDecay() {
+        if (statsDecayTimeline != null) {
+            statsDecayTimeline.stop();
+        }
+    }
 
     /**
      * Event handler for the back button.
@@ -99,6 +183,7 @@ public class GameController {
      */
     @FXML
     private void goBack() {
+        stopStatsDecay();
         if (animation != null) {
             animation.stop();
         }
@@ -158,8 +243,8 @@ public class GameController {
 
         if (pet != null) {
             VitalStats stats = pet.getStats();
-            stats.increaseHygiene(50); // Increase hygiene
-            stats.increaseEnergy(30); // Increase health
+            stats.increaseHealth(50); // Increase health
+            stats.increaseEnergy(30); // Increase energy
             stats.decreaseHappiness(10); // Decrease happiness
             System.out.println(pet.getName() + " went to the vet! Health and hygiene increased, but happiness decreased.");
         } else {
@@ -167,7 +252,14 @@ public class GameController {
         }
     }
     @FXML
-    private void openInventory(){System.out.println("Inventory has not been made yet");}
+    private void openInventory(){
+        System.out.println("Inventory has not been made yet");
+        stopStatsDecay();
+        if (animation != null) {
+            animation.stop();
+        }
+        SceneController.getInstance().switchToInventory();
+    }
     @FXML
     private void saveGame() {
         GameState gameState = GameState.getCurrentState();
@@ -181,6 +273,30 @@ public class GameController {
             e.printStackTrace();
         }
     }
+    private void handleCriticalState(int index) {
+        switch (index) {
+            case 0: // Hunger
+                System.out.println("Hunger is critically low! Consider feeding the pet.");
+                // Add additional logic here (e.g., display a warning in the UI)
+                break;
+            case 1: // Happiness
+                System.out.println("Happiness is critically low! Consider playing with the pet.");
+                // Add additional logic here
+                break;
+            case 2: // Energy
+                System.out.println("Energy is critically low! Pet go zzz.");
+                // Add additional logic here
+                break;
+            case 3: // Health
+                System.out.println("Health is too low game over.");
+                // Add additional logic here
+                break;
+            default:
+                System.out.println("Unknown critical state detected.");
+                break;
+        }
+    }
+
 }
 
 

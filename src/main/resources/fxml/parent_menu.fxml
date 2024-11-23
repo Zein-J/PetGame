@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.controller.ParentMenuController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      style="-fx-padding: 20; -fx-font-family: Arial;">
+
+    <!-- Title -->
+    <Label text="Parent Controls" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+    <!-- Toggle Switch -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Turn On" style="-fx-font-size: 18px;" />
+        <ToggleButton fx:id="parentModeToggle" text="OFF" onAction="#handleToggleParentMode" />
+    </HBox>
+
+    <!-- Select Save -->
+    <ComboBox fx:id="selectSaveDropdown" promptText="Select Save" visible="false" />
+
+    <!-- Time Limit -->
+    <HBox alignment="CENTER_LEFT" spacing="10" visible="false" fx:id="timeLimitSection">
+        <RadioButton fx:id="timeLimitToggle" text="Time Limit" onAction="#handleTimeLimitToggle" />
+        <TextField fx:id="timeLimitInput" promptText="Duration/Day" visible="false" />
+    </HBox>
+
+    <!-- View Stats -->
+    <HBox alignment="CENTER_LEFT" spacing="10" visible="false" fx:id="viewStatsSection">
+        <RadioButton fx:id="viewStatsToggle" text="View Stats" />
+    </HBox>
+
+    <!-- Revive Pet -->
+    <Button fx:id="revivePetButton" text="Revive Pet" visible="false" />
+
+    <!-- Inventory Section TODO: Implement inventory modification-->
+    <HBox alignment="CENTER" spacing="10" visible="false" fx:id="inventorySection">
+        <VBox alignment="CENTER">
+            <Label text="Item1" style="-fx-font-size: 12px;" />
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="Item2" style="-fx-font-size: 12px;" />
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="Item3" style="-fx-font-size: 12px;" />
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="Item4" style="-fx-font-size: 12px;" />
+        </VBox>
+    </HBox>
+
+    <!-- Go Back Button -->
+    <Button fx:id="goBackButton" text="Go Back" onAction="#handleGoBack" />
+</VBox>

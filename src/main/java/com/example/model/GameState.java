@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 /**
@@ -19,14 +20,22 @@ public class GameState {
 
     // The pet's current vital statistics
     private VitalStats stats;
+    private boolean controlParent;
+
+    private LocalDateTime sessionStartTime; // When the session started
+    private Duration totalPlayTime;        // Total time played
+
 
     /**
      * Constructor initializes a new game state with the current timestamp.
      * Sets the {@code savedAt} field to the current date and time.
      */
     public GameState() {
+        this.controlParent = false;
         this.savedAt = LocalDateTime.now();
     }
+
+
 
     /**
      * Retrieves the current game state.
@@ -104,4 +113,6 @@ public class GameState {
     public void setStats(VitalStats stats) {
         this.stats = stats;
     }
+    public void setControlParent(boolean controlParent) {this.controlParent= controlParent;}
+    public boolean getControlParent(){return controlParent;}
 }

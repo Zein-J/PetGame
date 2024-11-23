@@ -70,6 +70,13 @@ public class SceneController {
         loadFXML("settings.fxml");
     }
 
+    public void switchToInventory() {
+        loadFXML("inventory_menu.fxml");
+    }
+    public void switchToLoginParent() {loadFXML("login_menu.fxml");}
+
+    public void switchToParentMenu() {loadFXML("parent_menu.fxml");}
+
     /**
      * Retrieves the current active scene.
      * If no scene is currently active, attempts to find and set the scene from the first showing window.
@@ -119,4 +126,6 @@ public class SceneController {
             e.printStackTrace();
         }
     }
+
+
 }

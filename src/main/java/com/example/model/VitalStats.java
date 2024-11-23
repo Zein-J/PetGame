@@ -7,7 +7,22 @@ public class VitalStats {
     private final IntegerProperty hunger = new SimpleIntegerProperty(80);      // Default: well-fed
     private final IntegerProperty happiness = new SimpleIntegerProperty(70);  // Default: fairly happy
     private final IntegerProperty energy = new SimpleIntegerProperty(100);    // Default: fully energized
-    private final IntegerProperty hygiene = new SimpleIntegerProperty(100);   // Default: pristine
+    private final IntegerProperty health = new SimpleIntegerProperty(100);    // Default: healthy
+
+    // petState array to represent the state of each stat: 0 = OK, 1 = Critical
+    private final int[] petState = {0, 0, 0, 0}; // Index 0 = Hunger, 1 = Happiness, 2 = Energy, 3 = Health
+    // Define thresholds for stats
+    private static final int CRITICAL_THRESHOLD = 20; // Critical threshold for warnings
+    // Callback to notify the Pet object
+    private Runnable thresholdCallback;
+    public VitalStats() {
+        // Add listeners to monitor thresholds
+        hunger.addListener((observable, oldValue, newValue) -> updatePetState(0, newValue.intValue()));
+        happiness.addListener((observable, oldValue, newValue) -> updatePetState(1, newValue.intValue()));
+        energy.addListener((observable, oldValue, newValue) -> updatePetState(2, newValue.intValue()));
+        health.addListener((observable, oldValue, newValue) -> updatePetState(3, newValue.intValue()));
+
+    }
 
     // Getters for properties
     public IntegerProperty hungerProperty() {
@@ -22,8 +37,8 @@ public class VitalStats {
         return energy;
     }
 
-    public IntegerProperty hygieneProperty() {
-        return hygiene;
+    public IntegerProperty healthProperty() {
+        return health;
     }
 
     // Getters and setters for values
@@ -51,22 +66,21 @@ public class VitalStats {
         energy.set(clampValue(value));
     }
 
-    public int getHygiene() {
-        return hygiene.get();
+    public int getHealth() {
+        return health.get();
     }
 
-    public void setHygiene(int value) {
-        hygiene.set(clampValue(value));
+    public void setHealth(int value) {
+        health.set(clampValue(value));
     }
 
     // Adjust methods
-
-    public void increaseHygiene(int value) {
-        hygiene.set(Math.min(100, hygiene.get() + value));
+    public void increaseHealth(int value) {
+        health.set(Math.min(100, health.get() + value));
     }
 
-    public void decreaseHygiene(int value) {
-        hygiene.set(Math.max(0, hygiene.get() - value));
+    public void decreaseHealth(int value) {
+        health.set(Math.max(0, health.get() - value));
     }
 
     public void increaseHunger(int value) {
@@ -92,8 +106,29 @@ public class VitalStats {
     public void decreaseEnergy(int value) {
         energy.set(Math.max(0, energy.get() - value));
     }
+    public int[] getState(){return this.petState;}
+    public int getVitalState(int index) {return this.petState[index];}
 
+    // Update petState array based on the stat value
+    private void updatePetState(int index, int newValue) {
+        if (newValue < CRITICAL_THRESHOLD) {
+            petState[index] = 1; // Critical state
+            System.out.println(getStatName(index) + " is critically low! Current value: " + newValue);
+        } else {
+            petState[index] = 0; // Normal state
+        }
+    }
 
+    // Helper to get the stat name from the index
+    private String getStatName(int index) {
+        switch (index) {
+            case 0: return "Hunger";
+            case 1: return "Happiness";
+            case 2: return "Energy";
+            case 3: return "Health";
+            default: return "Unknown";
+        }
+    }
 
     // Clamp method to ensure values stay within range
     private int clampValue(int value) {

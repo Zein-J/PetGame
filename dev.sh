@@ -3,6 +3,7 @@ pnpm run watch &
 
 WATCHER_PID=$!
 
-mvn clean javafx:run
+# run maven in development mode
+mvn clean javafx:run -Djavafx.compile=true
 
 kill $WATCHER_PID
